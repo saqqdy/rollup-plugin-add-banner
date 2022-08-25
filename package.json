@@ -49,7 +49,7 @@
         "@eslint-sets/eslint-config-simple-ts": "^3.0.4",
 		"@microsoft/api-extractor": "^7.18.7",
 		"@rollup/plugin-babel": "^5.2.2",
-		"@rollup/plugin-commonjs": "^20.0.0",
+		"@rollup/plugin-commonjs": "^22.0.2",
 		"@rollup/plugin-node-resolve": "^13.0.4",
 		"babel-loader": "^8.2.2",
 		"esbuild": "^0.12.25",
