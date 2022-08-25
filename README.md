@@ -1,3 +1,5 @@
+<div style="text-align: center;" align="center">
+
 # rollup-plugin-add-banner
 
 一个添加库`banner`的`rollup`插件
@@ -10,6 +12,8 @@
 [![License][license-image]][license-url]
 
 [![Sonar][sonar-image]][sonar-url]
+
+</div>
 
 ## 安装
 
