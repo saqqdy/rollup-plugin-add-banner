@@ -9,6 +9,7 @@ specifiers:
   '@rollup/plugin-babel': ^5.3.1
   '@rollup/plugin-commonjs': ^22.0.2
   '@rollup/plugin-node-resolve': ^13.3.0
+  '@types/node': ^18.7.13
   babel-loader: ^8.2.5
   esbuild: ^0.15.5
   eslint: ^8.22.0
@@ -38,6 +39,7 @@ devDependencies:
   '@rollup/plugin-babel': 5.3.1_2uin6pbxavst3oir53roxbd5qi
   '@rollup/plugin-commonjs': 22.0.2_rollup@2.78.1
   '@rollup/plugin-node-resolve': 13.3.0_rollup@2.78.1
+  '@types/node': 18.7.13
   babel-loader: 8.2.5_@babel+core@7.18.13
   esbuild: 0.15.5
   eslint: 8.22.0
