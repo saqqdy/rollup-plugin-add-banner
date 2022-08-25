@@ -9,8 +9,8 @@ const REGISTRY_URL = 'https://registry.npmjs.org'
 const command = `npm --registry=${REGISTRY_URL} unpublish`
 
 for (const version of versions) {
-    execSync(`${command} rollup-plugin-add-banner@${version}`, {
-        stdio: 'inherit'
-    })
-    console.info(`UnPublished rollup-plugin-add-banner@${version}`)
+	execSync(`${command} rollup-plugin-add-banner@${version}`, {
+		stdio: 'inherit'
+	})
+	console.info(`UnPublished rollup-plugin-add-banner@${version}`)
 }

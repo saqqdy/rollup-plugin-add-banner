@@ -27,9 +27,9 @@ $ yarn add -D rollup-plugin-add-banner
 import banner from 'rollup-plugin-add-banner'
 
 plugins: [
-	banner({
-		content: ''
-	})
+    banner({
+        content: ''
+    })
 ]
 ```
 
