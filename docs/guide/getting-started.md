@@ -27,11 +27,15 @@ export default {
   },
   plugins: [
     addBanner({
-      content: '/*! My Library v1.0.0 (c) 2024 Author */'
+      content: '/*! ${name} v${version} (c) ${author} */'
     })
   ]
 }
 ```
+
+::: tip Template Variables
+The plugin automatically resolves `${name}`, `${version}`, `${author}`, and `${license}` from your `package.json`. No need to read the file manually!
+:::
 
 ::: tip Plugin Order
 The plugin should be placed at the end of your plugins array to ensure the banner is added to the final output.

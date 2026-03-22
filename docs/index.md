@@ -62,7 +62,7 @@ export default {
   },
   plugins: [
     addBanner({
-      content: '/*! My Library v1.0.0 (c) 2024 Author Released under MIT License */'
+      content: '/*! ${name} v${version} (c) ${author} */'
     })
   ]
 }
@@ -70,8 +70,9 @@ export default {
 
 ## Why rollup-plugin-add-banner?
 
+- **Template Variables**: Auto-resolve `${name}`, `${version}`, `${author}`, `${license}` from package.json
 - **Simple API**: Just provide the banner content and you're done
 - **Works with All Rollup Versions**: Compatible with Rollup 2.x, 3.x, and 4.x
-- **Multi-line Support**: Easily add multi-line license headers
-- **Source Map Support**: Correctly adjusts source maps when prepending banners
-- **Lightweight**: No runtime dependencies, minimal bundle impact
+- **Multiple Banners**: Different banners for different file types
+- **Include/Exclude**: Fine-grained control with glob patterns
+- **100% Test Coverage**: Thoroughly tested for reliability

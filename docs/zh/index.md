@@ -62,7 +62,7 @@ export default {
   },
   plugins: [
     addBanner({
-      content: '/*! My Library v1.0.0 (c) 2024 Author Released under MIT License */'
+      content: '/*! ${name} v${version} (c) ${author} */'
     })
   ]
 }
@@ -70,8 +70,9 @@ export default {
 
 ## 为什么选择 rollup-plugin-add-banner？
 
+- **模板变量**：自动从 package.json 解析 `${name}`、`${version}`、`${author}`、`${license}`
 - **简单 API**：只需提供 banner 内容即可
 - **全版本兼容**：支持 Rollup 2.x、3.x 和 4.x
-- **多行支持**：轻松添加多行许可证头
-- **Source Map 支持**：正确调整 source map
-- **轻量级**：无运行时依赖，对打包体积影响最小
+- **多 Banner 支持**：不同文件类型使用不同的 banner
+- **Include/Exclude**：使用 glob 模式精确控制
+- **100% 测试覆盖**：经过充分测试，可靠稳定

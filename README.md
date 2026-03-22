@@ -90,7 +90,7 @@ addBanner({
 addBanner({
   content: '/*! ${name} v${version} (c) ${author} */'
 })
-// Output: /*! rollup-plugin-add-banner v2.0.0 (c) saqqdy */
+// Output: /*! rollup-plugin-add-banner v2.0.1 (c) saqqdy */
 ```
 
 ### Multi-line Banner

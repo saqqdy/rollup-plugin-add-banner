@@ -27,11 +27,15 @@ export default {
   },
   plugins: [
     addBanner({
-      content: '/*! My Library v1.0.0 (c) 2024 Author */'
+      content: '/*! ${name} v${version} (c) ${author} */'
     })
   ]
 }
 ```
+
+::: tip 模板变量
+插件自动从 `package.json` 解析 `${name}`、`${version}`、`${author}` 和 `${license}`。无需手动读取文件！
+:::
 
 ::: tip 插件顺序
 插件应该放在插件数组的末尾，以确保 banner 被添加到最终输出中。
