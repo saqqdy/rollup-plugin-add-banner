@@ -12,6 +12,6 @@
 		"rollup": "2.78.1"
 	},
 	"dependencies": {
-		"rollup-plugin-add-banner": "link:../.."
+		"rollup-plugin-add-banner": "2.0.1"
 	}
 }
