@@ -1,0 +1,17 @@
+{
+	"name": "example-rollup-v2",
+	"version": "1.0.0",
+	"author": "saqqdy",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "rollup -c",
+		"start": "node dist/index.js"
+	},
+	"devDependencies": {
+		"rollup": "2.78.1"
+	},
+	"dependencies": {
+		"rollup-plugin-add-banner": "link:../.."
+	}
+}

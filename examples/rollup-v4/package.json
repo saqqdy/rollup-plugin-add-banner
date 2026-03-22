@@ -1,0 +1,17 @@
+{
+	"name": "example-rollup-v4",
+	"version": "1.0.0",
+	"author": "saqqdy",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "rollup -c",
+		"start": "node dist/index.js"
+	},
+	"devDependencies": {
+		"rollup": "^4.35.0"
+	},
+	"dependencies": {
+		"rollup-plugin-add-banner": "link:../.."
+	}
+}

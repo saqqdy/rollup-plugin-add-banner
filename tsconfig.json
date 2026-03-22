@@ -1,21 +1,28 @@
 {
 	"compilerOptions": {
-		"allowJs": true,
-		"target": "es5",
-		"moduleResolution": "node",
-		"noLib": false,
-		"lib": ["ESNext"],
-		"sourceMap": true,
-		// "module": "commonjs",
+		"target": "ES2022",
 		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"lib": ["ES2023"],
+		"types": ["node"],
 		"strict": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
 		"resolveJsonModule": true,
 		"declaration": true,
-		"noImplicitOverride": true,
+		"declarationMap": true,
+		"sourceMap": true,
 		"noUnusedLocals": true,
-		"esModuleInterop": true,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"allowSyntheticDefaultImports": true
-	}
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noUncheckedIndexedAccess": true,
+		"exactOptionalPropertyTypes": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "dist", "test", "scripts"]
 }
