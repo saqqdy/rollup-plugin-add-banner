@@ -1,7 +1,7 @@
 {
 	"name": "rollup-plugin-add-banner",
-	"description": "A Rollup plugin that adds banner to the output bundle.",
-	"version": "2.0.0",
+	"description": "A Rollup plugin that adds banner comments to the output bundle.",
+	"version": "2.0.1",
 	"packageManager": "pnpm@9.15.9",
 	"type": "module",
 	"main": "dist/index.cjs",
@@ -63,7 +63,13 @@
 		"rollup-plugin",
 		"banner",
 		"header",
-		"bundler"
+		"comment",
+		"license",
+		"prepend",
+		"sourcemap",
+		"bundler",
+		"vite",
+		"typescript"
 	],
 	"sideEffects": false,
 	"license": "MIT",

@@ -25,7 +25,7 @@ console.log(plugin.name) // 'add-banner'
 
 ```js
 const plugin = addBanner({ content: '/* banner */' })
-console.log(plugin.version) // '2.0.0'
+console.log(plugin.version) // '2.0.1'
 ```
 
 ### api

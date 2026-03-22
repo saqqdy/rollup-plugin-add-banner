@@ -27,9 +27,6 @@ pnpm add -D rollup-plugin-add-banner
 
 # npm
 npm install -D rollup-plugin-add-banner
-
-# yarn
-yarn add -D rollup-plugin-add-banner
 ```
 
 ## 用法

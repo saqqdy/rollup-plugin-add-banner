@@ -13,7 +13,7 @@ describe('add-banner', () => {
 
 		it('should have version', () => {
 			const plugin = addBanner({ content: '/* banner */' })
-			expect(plugin.version).toBe('2.0.0')
+			expect(plugin.version).toBe('2.0.1')
 		})
 
 		it('should have renderChunk hook', () => {
@@ -132,7 +132,7 @@ describe('add-banner', () => {
 			 
 			const plugin = addBanner({ content: '/*! v${version} */' })
 			const banner = plugin.api.getBanner()
-			expect(banner).toContain('v2.0.0')
+			expect(banner).toContain('v2.0.1')
 		})
 
 		it('should resolve custom vars', () => {
@@ -158,15 +158,34 @@ describe('add-banner', () => {
 			const pkgFile = join(tempDir, 'package.json')
 			writeFileSync(pkgFile, JSON.stringify({ name: 'test', author: 'Test Author <test@test.com>' }))
 
-			 
+
 			const plugin = addBanner({
-				 
+
 				content: '/*! ${author} */',
 				pkgPath: pkgFile
 			})
 			const banner = plugin.api.getBanner()
 
 			expect(banner).toContain('Test Author')
+
+			rmSync(tempDir, { recursive: true, force: true })
+		})
+
+		it('should resolve author from object format with name', () => {
+			const tempDir = join(tmpdir(), 'rollup-plugin-add-banner-test')
+			mkdirSync(tempDir, { recursive: true })
+			const pkgFile = join(tempDir, 'package.json')
+			writeFileSync(pkgFile, JSON.stringify({ name: 'test', author: { name: 'Object Author', email: 'test@test.com' } }))
+
+
+			const plugin = addBanner({
+
+				content: '/*! ${author} */',
+				pkgPath: pkgFile
+			})
+			const banner = plugin.api.getBanner()
+
+			expect(banner).toContain('Object Author')
 
 			rmSync(tempDir, { recursive: true, force: true })
 		})
@@ -212,6 +231,23 @@ describe('add-banner', () => {
 			const plugin = addBanner({
 				content: '/* banner */',
 				exclude: ['**/*.min.js']
+			})
+			const code = 'console.log("hello")'
+
+			const normalChunk = { fileName: 'dist/index.js' } as any
+			const minChunk = { fileName: 'dist/index.min.js' } as any
+
+			const normalResult = plugin.renderChunk!(code, normalChunk, { sourcemap: false })
+			const minResult = plugin.renderChunk!(code, minChunk, { sourcemap: false })
+
+			expect(normalResult!.code).toContain('banner')
+			expect(minResult).toBeNull()
+		})
+
+		it('should handle exclude as string', () => {
+			const plugin = addBanner({
+				content: '/* banner */',
+				exclude: '**/*.min.js'
 			})
 			const code = 'console.log("hello")'
 
@@ -310,6 +346,26 @@ describe('add-banner', () => {
 			expect(cssResult).toBeNull()
 		})
 
+		it('should handle exclude as array', () => {
+			const plugin = addBanner({
+				content: '/* banner */',
+				exclude: ['**/*.min.js', '**/*.test.js']
+			})
+			const code = 'console.log("hello")'
+
+			const normalChunk = { fileName: 'dist/index.js' } as any
+			const minChunk = { fileName: 'dist/index.min.js' } as any
+			const testChunk = { fileName: 'dist/index.test.js' } as any
+
+			const normalResult = plugin.renderChunk!(code, normalChunk, { sourcemap: false })
+			const minResult = plugin.renderChunk!(code, minChunk, { sourcemap: false })
+			const testResult = plugin.renderChunk!(code, testChunk, { sourcemap: false })
+
+			expect(normalResult!.code).toContain('banner')
+			expect(minResult).toBeNull()
+			expect(testResult).toBeNull()
+		})
+
 		it('should handle exact match pattern', () => {
 			const plugin = addBanner({
 				content: '/* banner */',
@@ -355,13 +411,55 @@ describe('add-banner', () => {
 		it('should resolve template variables in banners', () => {
 			const plugin = addBanner({
 				banners: {
-					 
+
 					'.js': '/*! ${name} ${version} */'
 				}
 			})
 
 			const banners = plugin.api.getBanners()
 			expect(banners!['.js']).toContain('rollup-plugin-add-banner')
+		})
+
+		it('should match banners by pattern (not just extension)', () => {
+			const plugin = addBanner({
+				content: '/* default */',
+				banners: {
+					'min.js': '/* minified banner */',
+					'bundle': '/* bundle banner */'
+				}
+			})
+			const code = 'console.log("hello")'
+
+			const minChunk = { fileName: 'dist/index.min.js' } as any
+			const bundleChunk = { fileName: 'dist/bundle.js' } as any
+			const otherChunk = { fileName: 'dist/index.js' } as any
+
+			const minResult = plugin.renderChunk!(code, minChunk, { sourcemap: false })
+			const bundleResult = plugin.renderChunk!(code, bundleChunk, { sourcemap: false })
+			const otherResult = plugin.renderChunk!(code, otherChunk, { sourcemap: false })
+
+			expect(minResult!.code).toContain('minified banner')
+			expect(bundleResult!.code).toContain('bundle banner')
+			expect(otherResult!.code).toContain('default')
+		})
+
+		it('should match banners by wildcard pattern', () => {
+			const plugin = addBanner({
+				content: '/* default */',
+				banners: {
+					'*.min.js': '/* minified banner */'
+				}
+			})
+			const code = 'console.log("hello")'
+
+			const minChunk = { fileName: 'index.min.js' } as any
+			const normalChunk = { fileName: 'index.js' } as any
+
+			const minResult = plugin.renderChunk!(code, minChunk, { sourcemap: false })
+			const normalResult = plugin.renderChunk!(code, normalChunk, { sourcemap: false })
+
+			expect(minResult!.code).toContain('minified banner')
+			expect(normalResult!.code).toContain('default')
 		})
 	})
 
@@ -420,7 +518,7 @@ describe('add-banner', () => {
 			const banner = plugin.api.getBanner()
 
 			expect(banner).toContain('rollup-plugin-add-banner')
-			expect(banner).toContain('v2.0.0')
+			expect(banner).toContain('v2.0.1')
 
 			rmSync(tempDir, { recursive: true, force: true })
 		})
@@ -478,13 +576,32 @@ describe('add-banner', () => {
 			writeFileSync(pkgFile, 'invalid json')
 
 			const plugin = addBanner({
-				 
+
 				content: '/*! ${name} */',
 				pkgPath: pkgFile
 			})
 			const banner = plugin.api.getBanner()
 
 			expect(banner).toBe('/*!  */')
+
+			rmSync(tempDir, { recursive: true, force: true })
+		})
+
+		it('should handle package.json with missing name', () => {
+			const tempDir = join(tmpdir(), 'rollup-plugin-add-banner-test')
+			mkdirSync(tempDir, { recursive: true })
+			const pkgFile = join(tempDir, 'package.json')
+			writeFileSync(pkgFile, JSON.stringify({ version: '1.0.0' }))
+
+
+			const plugin = addBanner({
+
+				content: '/*! ${name} v${version} */',
+				pkgPath: pkgFile
+			})
+			const banner = plugin.api.getBanner()
+
+			expect(banner).toBe('/*!  v1.0.0 */')
 
 			rmSync(tempDir, { recursive: true, force: true })
 		})

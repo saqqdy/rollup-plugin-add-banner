@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1] - 2025-03-22
+
+### Bug Fixes
+
+- Fixed author resolution from object format in package.json (previously returned `[object Object]`)
+
+### Documentation
+
+- Updated docs theme color to Blue/Tech modern style
+- New banner/flag style logo
+
+### Tests
+
+- Added tests for 100% code coverage (57 test cases)
+- Added tests for pattern-based banners
+- Added tests for author object format
+- Added tests for exclude as string vs array
+
+---
+
 ## [2.0.0] - 2025-03-22
 
 ### Breaking Changes

@@ -2,6 +2,7 @@ import type { Plugin, RenderChunkHook, SourceMapInput } from 'rollup'
 import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import MagicString from 'magic-string'
+import pkg from '../package.json' with { type: 'json' }
 
 export interface Options {
 	/**
@@ -62,7 +63,7 @@ interface PkgInfo {
 	[key: string]: string
 }
 
-const PACKAGE_VERSION = '2.0.0'
+const PACKAGE_VERSION = pkg.version
 
 /**
  * Creates a filter function from include/exclude patterns.
@@ -144,11 +145,11 @@ function readPkgInfo(pkgPath: string): PkgInfo {
 	try {
 		const pkg = JSON.parse(readFileSync(path, 'utf-8'))
 		return {
+			...pkg,
 			name: pkg.name || '',
 			version: pkg.version || '',
 			author: typeof pkg.author === 'string' ? pkg.author : pkg.author?.name || '',
-			license: pkg.license || '',
-			...pkg
+			license: pkg.license || ''
 		}
 	} catch {
 		return { name: '', version: '', author: '', license: '' }
